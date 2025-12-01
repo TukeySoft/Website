@@ -1,0 +1,530 @@
+import React, { useState } from 'react';
+import { Users, Target, Lightbulb, BookOpen, Award, MapPin, Briefcase, Heart, Leaf, GraduationCap, Shield } from 'lucide-react';
+
+export default function SomaiProfile() {
+  const [activeSection, setActiveSection] = useState('overview');
+
+  const sections = [
+    { id: 'overview', label: 'Overview', icon: Target },
+    { id: 'purpose', label: 'Purpose', icon: Lightbulb },
+    { id: 'activities', label: 'What We Do', icon: Briefcase },
+    { id: 'focus', label: 'Focus Areas', icon: MapPin },
+    { id: 'membership', label: 'Membership', icon: Users },
+    { id: 'structure', label: 'Structure', icon: Award },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-green-50">
+      {/* Header */}
+      <header className="bg-gradient-to-r from-teal-600 to-teal-700 text-white py-8 px-6 shadow-lg">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-6 mb-4">
+            <div className="bg-white p-3 rounded-lg shadow-md">
+              <img 
+                src="https://raw.githubusercontent.com/user-attachments/assets/placeholder.png" 
+                alt="SOMAI Logo"
+                className="w-20 h-20 object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'block';
+                }}
+              />
+              <div style={{display: 'none'}} className="w-20 h-20 bg-gradient-to-br from-teal-500 via-orange-400 to-green-500 rounded-lg flex items-center justify-center text-white font-bold text-2xl">
+                SOMAI
+              </div>
+            </div>
+            <div>
+              <h1 className="text-4xl font-bold mb-2">SOMAI</h1>
+              <p className="text-xl text-teal-100">Social Marketing Association of India</p>
+            </div>
+          </div>
+          <p className="text-lg text-teal-50 max-w-3xl italic border-l-4 border-orange-400 pl-4">
+            India's leading national authority for ethical, evidence-based, citizen-centric Social Marketing
+          </p>
+        </div>
+      </header>
+
+      {/* Navigation */}
+      <nav className="bg-white shadow-md sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-6 py-3">
+          <div className="flex gap-2 overflow-x-auto">
+            {sections.map(section => {
+              const Icon = section.icon;
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
+                    activeSection === section.id
+                      ? 'bg-teal-600 text-white shadow-md'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Icon size={18} />
+                  <span className="font-medium">{section.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto px-6 py-8">
+        {activeSection === 'overview' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-teal-700 mb-4 flex items-center gap-3">
+                <Target className="text-orange-500" />
+                What is SOMAI?
+              </h2>
+              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                SOMAI (Social Marketing Association of India) is a <strong>national professional body</strong> dedicated to advancing the field of Social Marketing in India.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                SOMAI's purpose is to build a strong community of social marketing practitioners, researchers, NGOs, policymakers, and development professionals who work together to create ethical, evidence-based, citizen-centric social change in India.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-br from-teal-600 to-teal-700 text-white rounded-xl shadow-lg p-8">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Lightbulb size={28} />
+                  Mission
+                </h3>
+                <p className="text-teal-50 leading-relaxed">
+                  To promote ethical, evidence-based, citizen-centric Social Marketing across India to create sustainable, meaningful, and positive behavioural change for social good.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-xl shadow-lg p-8">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Award size={28} />
+                  Vision
+                </h3>
+                <p className="text-orange-50 leading-relaxed">
+                  To become India's leading national authority and community for Social Marketing — enabling governments, communities, NGOs, and academia to adopt modern, ethical, research-based methods for solving India's most pressing social challenges.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h3 className="text-2xl font-bold text-teal-700 mb-6">Guiding Principles</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {[
+                  { title: 'Citizen Orientation', desc: 'Work with people, not on people' },
+                  { title: 'Ethical Practice', desc: 'No manipulation; respect citizen rights and freedoms' },
+                  { title: 'Evidence & Data Driven', desc: 'Use insights, research, and real data for decisions' },
+                  { title: 'Value Creation', desc: 'Create solutions that communities find useful and meaningful' },
+                  { title: 'Collaboration & Partnerships', desc: 'Government + NGOs + Academia + Private sector' },
+                  { title: 'Behavioural Objectives', desc: 'Focus on measurable behavioural outcomes' },
+                  { title: 'Inclusivity & Accessibility', desc: 'Social Marketing for all social groups across India' },
+                ].map((principle, idx) => (
+                  <div key={idx} className="flex gap-3 p-4 bg-teal-50 rounded-lg border-l-4 border-teal-500">
+                    <div className="flex-shrink-0 w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-teal-800">{principle.title}</h4>
+                      <p className="text-sm text-gray-600">{principle.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'purpose' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-teal-700 mb-6">Why SOMAI Exists</h2>
+              
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-gray-800 mb-4">India's Challenges</h3>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {[
+                    { icon: Heart, text: 'Public Health' },
+                    { icon: Leaf, text: 'Environmental Sustainability' },
+                    { icon: Users, text: 'Social Inclusion' },
+                    { icon: Shield, text: 'Sanitation & Hygiene' },
+                    { icon: Target, text: 'Behaviour Change Programs' },
+                    { icon: GraduationCap, text: 'Education & Awareness' },
+                  ].map((challenge, idx) => {
+                    const Icon = challenge.icon;
+                    return (
+                      <div key={idx} className="flex items-center gap-3 p-4 bg-gradient-to-r from-teal-50 to-green-50 rounded-lg">
+                        <Icon className="text-teal-600" size={24} />
+                        <span className="font-medium text-gray-700">{challenge.text}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-orange-800 mb-4">The Reality</h3>
+                <p className="text-gray-700 mb-4">
+                  Traditional top-down information campaigns are often <strong>not enough</strong> to change behaviour.
+                </p>
+                <h4 className="font-bold text-gray-800 mb-3">SOMAI's Response:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>✓ Promote Social Marketing as a scientific, ethical, and effective approach to behaviour change</li>
+                  <li>✓ Help government, NGOs, and private organizations design people-centered interventions</li>
+                  <li>✓ Build India's own research base, case studies, training, and expertise</li>
+                  <li>✓ Connect India with global social marketing networks and frameworks</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h3 className="text-2xl font-bold text-teal-700 mb-6">Who SOMAI Serves</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  'Social marketing practitioners',
+                  'Behaviour change experts',
+                  'Public health program managers',
+                  'Government departments',
+                  'NGOs & nonprofits',
+                  'Corporate CSR teams',
+                  'Academics & researchers',
+                  'Students in social sciences',
+                ].map((audience, idx) => (
+                  <div key={idx} className="p-4 bg-gradient-to-br from-teal-500 to-green-500 text-white rounded-lg shadow-md">
+                    <p className="font-medium">{audience}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-6 text-center text-lg text-gray-700 font-medium">
+                Acting as a <span className="text-teal-600 font-bold">bridge between policy, research, and practice</span>
+              </p>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'activities' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-teal-700 mb-6">What SOMAI Does</h2>
+              
+              <div className="space-y-6">
+                {[
+                  {
+                    title: 'Knowledge & Research Platform',
+                    icon: BookOpen,
+                    color: 'from-blue-500 to-blue-600',
+                    items: [
+                      'Shares Indian + international research, case studies, and publications',
+                      'Provides members with journals, frameworks, and toolkits',
+                      'Creates an Indian repository of Social Marketing best practices',
+                    ]
+                  },
+                  {
+                    title: 'Community & Networking',
+                    icon: Users,
+                    color: 'from-teal-500 to-teal-600',
+                    items: [
+                      'Connects professionals from different states, sectors, and institutions',
+                      'Builds a national network similar to ESMA',
+                      'Offers collaboration and project support opportunities',
+                    ]
+                  },
+                  {
+                    title: 'Training & Skill Development',
+                    icon: GraduationCap,
+                    color: 'from-green-500 to-green-600',
+                    items: [
+                      'Workshops, seminars, and webinars',
+                      'Certification programs',
+                      'Government & NGO capacity building',
+                      'Tools for behaviour-change strategy design',
+                    ]
+                  },
+                  {
+                    title: 'Social Marketing Projects & Support',
+                    icon: Target,
+                    color: 'from-orange-500 to-orange-600',
+                    items: [
+                      'Helps organisations design behaviour change campaigns',
+                      'Provides advisory & consultancy support',
+                      'Supports pilot projects in health, environment, education, inclusion',
+                    ]
+                  },
+                  {
+                    title: 'Events & Conferences',
+                    icon: Award,
+                    color: 'from-purple-500 to-purple-600',
+                    items: [
+                      'Organises India\'s Social Marketing Summit (annual)',
+                      'Regional/state conferences',
+                      'Paper presentations, keynote sessions, panel discussions',
+                      'Partnerships with global bodies (iSMA, ESMA, AASM, SMANA)',
+                    ]
+                  },
+                ].map((activity, idx) => {
+                  const Icon = activity.icon;
+                  return (
+                    <div key={idx} className="border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
+                      <div className={`bg-gradient-to-r ${activity.color} text-white p-4 flex items-center gap-3`}>
+                        <Icon size={28} />
+                        <h3 className="text-xl font-bold">{activity.title}</h3>
+                      </div>
+                      <div className="p-6 bg-gray-50">
+                        <ul className="space-y-2">
+                          {activity.items.map((item, itemIdx) => (
+                            <li key={itemIdx} className="flex items-start gap-2">
+                              <span className="text-teal-600 font-bold mt-1">•</span>
+                              <span className="text-gray-700">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'focus' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-teal-700 mb-6">Projects & Focus Areas</h2>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: 'Public Health',
+                    icon: Heart,
+                    color: 'bg-red-100 border-red-400',
+                    textColor: 'text-red-700',
+                    items: ['Nutrition', 'Vaccination', 'Disease prevention', 'Mental health awareness']
+                  },
+                  {
+                    title: 'Environment & Sustainability',
+                    icon: Leaf,
+                    color: 'bg-green-100 border-green-400',
+                    textColor: 'text-green-700',
+                    items: ['Waste segregation', 'Water conservation', 'Climate action behaviours']
+                  },
+                  {
+                    title: 'Social Inclusion',
+                    icon: Users,
+                    color: 'bg-blue-100 border-blue-400',
+                    textColor: 'text-blue-700',
+                    items: ['Disability inclusion', 'Elderly care', 'Gender equity', 'Child safety']
+                  },
+                  {
+                    title: 'Education & Digital Literacy',
+                    icon: GraduationCap,
+                    color: 'bg-purple-100 border-purple-400',
+                    textColor: 'text-purple-700',
+                    items: ['School programs', 'Youth campaigns', 'Misinformation reduction']
+                  },
+                  {
+                    title: 'Road Safety & Compliance',
+                    icon: Shield,
+                    color: 'bg-orange-100 border-orange-400',
+                    textColor: 'text-orange-700',
+                    items: ['Helmet use', 'Seat belt use', 'Safe driving behaviours']
+                  },
+                  {
+                    title: 'Government Schemes',
+                    icon: Award,
+                    color: 'bg-teal-100 border-teal-400',
+                    textColor: 'text-teal-700',
+                    items: ['Swachh Bharat', 'Jal Jeevan Mission', 'Ayushman Bharat', 'Digital India']
+                  },
+                ].map((area, idx) => {
+                  const Icon = area.icon;
+                  return (
+                    <div key={idx} className={`${area.color} border-2 rounded-xl p-6 hover:shadow-lg transition-shadow`}>
+                      <div className="flex items-center gap-3 mb-4">
+                        <Icon className={area.textColor} size={32} />
+                        <h3 className={`text-xl font-bold ${area.textColor}`}>{area.title}</h3>
+                      </div>
+                      <ul className="space-y-1">
+                        {area.items.map((item, itemIdx) => (
+                          <li key={itemIdx} className="flex items-start gap-2 text-gray-700">
+                            <span className={`${area.textColor} font-bold`}>→</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'membership' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-teal-700 mb-6">Membership</h2>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-gradient-to-br from-teal-500 to-teal-600 text-white rounded-xl p-6">
+                  <h3 className="text-2xl font-bold mb-4">Individual Membership</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      Student Member
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      Professional Member
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      Supporter Member
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-xl p-6">
+                  <h3 className="text-2xl font-bold mb-4">Organizational Membership</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      NGOs
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      Academic institutions
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      CSR teams
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      Government bodies
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      Consulting firms
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-50 to-teal-50 rounded-xl p-8">
+                <h3 className="text-2xl font-bold text-teal-700 mb-6">Membership Benefits</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {[
+                    'Access to research, journals, and toolkits',
+                    'Event discounts',
+                    'Priority for training workshops',
+                    'Access to SOMAI resource library',
+                    'Listing in the national directory',
+                    'Opportunity to publish research or case studies',
+                    'Member-only newsletters & updates',
+                  ].map((benefit, idx) => (
+                    <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
+                      <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                        ✓
+                      </div>
+                      <span className="text-gray-700">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'structure' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-teal-700 mb-6">Organizational Structure</h2>
+              
+              <div className="space-y-6">
+                <div className="border-2 border-teal-500 rounded-xl overflow-hidden">
+                  <div className="bg-teal-600 text-white p-4">
+                    <h3 className="text-xl font-bold">Executive Board</h3>
+                  </div>
+                  <div className="p-6 bg-teal-50">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {['President', 'Vice President', 'Secretary', 'Treasurer', 'Board Member - Policy', 'Board Member - Research', 'Board Member - Outreach', 'Board Member - Membership', 'Board Member - Partnerships'].map((role, idx) => (
+                        <div key={idx} className="bg-white p-3 rounded-lg shadow-sm border border-teal-200">
+                          <p className="font-medium text-gray-700">{role}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-2 border-green-500 rounded-xl overflow-hidden">
+                  <div className="bg-green-600 text-white p-4">
+                    <h3 className="text-xl font-bold">State Representatives</h3>
+                  </div>
+                  <div className="p-6 bg-green-50">
+                    <p className="text-gray-700 mb-4">Each Indian state will have a SOMAI representative to coordinate:</p>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {['Regional projects', 'Membership', 'Training activities', 'Local events'].map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm">
+                          <MapPin className="text-green-600" size={20} />
+                          <span className="text-gray-700">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-2 border-orange-500 rounded-xl overflow-hidden">
+                  <div className="bg-orange-600 text-white p-4">
+                    <h3 className="text-xl font-bold">Working Committees</h3>
+                  </div>
+                  <div className="p-6 bg-orange-50">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        'Research Committee',
+                        'Events & Conferences',
+                        'Training & Capacity Building',
+                        'Government Partnerships',
+                        'Membership Development',
+                        'Communications',
+                      ].map((committee, idx) => (
+                        <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
+                          <p className="font-medium text-gray-700">{committee}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-teal-600 to-green-600 text-white rounded-xl shadow-lg p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">SOMAI is India's ESMA</h3>
+              <p className="text-lg text-teal-50 max-w-3xl mx-auto">
+                Built intentionally for Indian context, behaviour patterns, public sector structures, cultural diversity, and social challenges
+              </p>
+            </div>
+          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-8 px-6 mt-12">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-lg font-medium mb-2">Social Marketing Association of India</p>
+          <p className="text-gray-400">Prepared by TukeySoft</p>
+        </div>
+      </footer>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.4s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+}
